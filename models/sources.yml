@@ -4,3 +4,6 @@ sources:
     schema: RAW 
     tables:
       - name: customers_raw
+      - name: transactions
+
+      

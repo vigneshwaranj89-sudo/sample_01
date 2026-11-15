@@ -1,3 +1,4 @@
+
 version: 2
 
 models:
@@ -14,3 +15,64 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: STG_transactions
+    columns:
+      - name: txn_id
+        data_tests:
+          - unique
+          - not_null
+          - space_validate
+
+      - name: account_id
+        data_tests:
+          - not_null
+
+      - name: txn_ts
+        data_tests:
+          - not_null
+
+      - name: value_date
+        data_tests:
+          - not_null
+
+      - name: txn_type
+        data_tests:
+          - space_validate
+
+      - name: channel
+        data_tests:
+          - space_validate
+
+      - name: direction
+        data_tests:
+          - space_validate
+
+      - name: amount
+        data_tests:
+          - not_null
+          - negative_check
+
+      - name: currency
+        data_tests:
+          - space_validate
+
+      - name: balance_after
+        data_tests:
+          - negative_check
+
+      - name: description
+        data_tests:
+          - space_validate
+
+      - name: counterparty_account
+        data_tests:
+          - space_validate
+
+      - name: merchant_category_code
+        data_tests:
+          - space_validate
+
+      - name: status
+        data_tests:
+          - space_validate

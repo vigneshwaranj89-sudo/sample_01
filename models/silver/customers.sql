@@ -27,5 +27,9 @@ SELECT
     v:onboarding_date::DATE AS onboarding_date,
     v:customer_status::TEXT AS customer_status,
     v:created_ts::TIMESTAMP_NTZ AS created_ts,
-    v:last_updated_ts::TIMESTAMP_NTZ AS last_updated_ts
+    v:last_updated_ts::TIMESTAMP_NTZ AS last_updated_ts,
+    v:change_type::string          as change_type,
+    v:change_ts::timestamp_ntz     as change_ts,       -- cast it the same way you cast last_updated_ts
+    v:changed_columns::string      as changed_columns,
+    v:batch_id::string             as batch_id
 FROM {{ source('cust', 'customers_raw') }}

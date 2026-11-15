@@ -33,6 +33,10 @@ coalesce(phone,'unknown') as phone,
 {{coal_mco('customer_status')}} as customer_status,
 {{coal_mco('created_ts')}} as created_ts,
 {{coal_mco('last_updated_ts')}} as last_updated_ts,
+{{coal_mco('change_type')}}       as change_type,
+{{coal_mco('to_varchar(change_ts)')}}     as change_ts,       -- cast it the same way you cast last_updated_ts
+{{coal_mco('changed_columns')}}      as changed_columns,
+{{coal_mco('batch_id')}}            as batch_id,
 row_number() over(partition by customer_id order by last_updated_ts desc) as rn
 
 from {{ ref('customers') }}

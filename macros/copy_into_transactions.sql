@@ -1,9 +1,9 @@
 {% macro copy_into_transactions(
     target_table='raw.transactions',
     error_table='raw.error_table',
-    audit_table='raw.load_audit',
-    stage='@banking_stage',
-    file_format='ff_p',
+    audit_table='raw.transactions_audit',
+    stage='@snap_sc.banking_stage',
+    file_format='snap_sc.ff_p',
     pattern='.*transactions.*[.]parquet'
 ) %}
 
@@ -12,8 +12,8 @@
     {# 1. Load good rows, skip bad ones #}
     {% set load_sql %}
         COPY INTO {{ target_table }} (v, _source_file)
-        FROM (SELECT $1, METADATA$FILENAME FROM {{ stage }})
-        FILE_FORMAT = (FORMAT_NAME = '{{ file_format }}')
+        FROM (SELECT $1, METADATA$FILENAME FROM '{{ stage }}')
+        FILE_FORMAT = '{{ file_format }}'
         PATTERN = '{{ pattern }}'
         ON_ERROR = 'CONTINUE'
     {% endset %}
